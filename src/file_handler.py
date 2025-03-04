@@ -5,8 +5,14 @@ Handles all interaction with Squad ini files.
 import os
 import logging
 import shutil
-import const
 import re
+import pathlib
+
+from src.const import (NORMAL_SETTINGS_FILE, SEED_SETTINGS_FILE, 
+                       GAME_SETTINGS_FILE, SETTINGS_DATA, SEED_MODE, NORMAL_MODE)
+
+SETTING_DIRECTORY = (pathlib.Path(os.getenv('LOCALAPPDATA'))) / 'SquadGame' / \
+    'Saved' / 'Config' / 'WindowsNoEditor'
 
 class FileHandler:
     """
@@ -19,20 +25,20 @@ class FileHandler:
     4. Create seed file.
     """
     def __init__(self) -> None:
-        self.dir = const.DIR
-        self.game = os.path.join(const.DIR, const.GAME)
-        self.seed = os.path.join(const.DIR, const.SEED)
-        self.normal = os.path.join(const.DIR, const.NORMAL)
-        self.settings = const.SETTINGS
+        self.dir = SETTING_DIRECTORY
+        self.game = os.path.join(SETTING_DIRECTORY, GAME_SETTINGS_FILE)
+        self.seed = os.path.join(SETTING_DIRECTORY, SEED_SETTINGS_FILE)
+        self.normal = os.path.join(SETTING_DIRECTORY, NORMAL_SETTINGS_FILE)
+        self.settings = SETTINGS_DATA
 
     def does_ini_file_exist(self, mode) -> bool:
         """
         Check if a file of a specified type exists.
         """
         does_exist = False
-        if mode == "seed":
+        if mode == SEED_MODE:
             does_exist = os.path.exists(self.seed)
-        elif mode == "normal":
+        elif mode == NORMAL_MODE:
             does_exist = os.path.exists(self.normal)
         else:
             does_exist = False
@@ -44,9 +50,9 @@ class FileHandler:
         """
         Switch between modes.
         """
-        if mode.lower() in "normal":
+        if mode.lower() in NORMAL_MODE:
             new_ini_path = self.normal
-        elif mode.lower() in "seed":
+        elif mode.lower() in SEED_MODE:
             new_ini_path = self.seed
         else:
             logging.error("Invalid mode of: %s", mode)
@@ -73,23 +79,6 @@ class FileHandler:
         """
         with open(self.seed, "w", encoding="UTF-8") as file:
             file.write(self.settings)
-
-    def get_server_name(self) -> str:
-        """
-        Finds the desired server name
-        """
-        server_name = ""
-        if os.path.isfile(self.seed):
-            with open(self.seed, "r+", encoding="UTF-8") as file:
-                first_line=file.readline()
-                match = re.search("^server_name=(.*)$", first_line)
-                if match is not None:
-                    server_name =  match.group()[12:]
-                else:
-                    server_name = 'None'
-        else:
-            server_name = 'None'
-        return server_name
 
 def is_seed_ini(file_path) -> bool:
     """

@@ -1,17 +1,16 @@
 """Software wide constants""" 
 
-import os
-import pathlib
+SEED_MODE = 'seed'
 
-DIR = (pathlib.Path(os.getenv('LOCALAPPDATA'))) / 'SquadGame' / 'Saved' / 'Config' / 'WindowsNoEditor'
+NORMAL_MODE = 'normal'
 
-NORMAL = "NormalGameUserSettings.ini"
+NORMAL_SETTINGS_FILE = "NormalGameUserSettings.ini"
 
-SEED = "SeedGameUserSettings.ini"
+SEED_SETTINGS_FILE = "SeedGameUserSettings.ini"
 
-GAME = 'GameUserSettings.ini'
+GAME_SETTINGS_FILE = 'GameUserSettings.ini'
 
-SETTINGS = """
+SETTINGS_DATA = """
 ;SEED_MODE
 [D3DRHIPreference]
 bUseD3D12InGame=False

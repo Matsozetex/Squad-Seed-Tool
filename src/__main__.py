@@ -2,7 +2,6 @@
 Runs the seeding application.
 """
 
-import os
 import sys
 from file_handler import FileHandler
 import args_interface
@@ -20,7 +19,7 @@ def main():
             cli_interface.menu_handler(ini_dir)
         except KeyboardInterrupt:
             print("\nKeyboard Interrupt detected, closing tool.")
-            os._exit(0)
+            sys.exit(0)
 
 if __name__ == "__main__":
     main()

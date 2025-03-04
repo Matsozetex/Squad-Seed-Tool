@@ -5,6 +5,7 @@ Defines behaviour of argument controls.
 import argparse
 import user_actions
 from file_handler import FileHandler
+from src.const import SEED_MODE, NORMAL_MODE
 
 def argument_handler()-> None:
     """
@@ -23,14 +24,14 @@ def argument_handler()-> None:
         '-m',
         '--make', 
         type=str,
-        choices=['seed', 'normal'],
+        choices=[SEED_MODE, NORMAL_MODE],
         help='make or update/reset the alternate profiles'
         )
     exclusive_group.add_argument(
         '-r', 
         '--run', 
         type=str,
-        choices=['seed', 'normal'],
+        choices=[SEED_MODE, NORMAL_MODE],
         help='run the game in the alternate mode'
         )
     exclusive_group.add_argument(
@@ -56,14 +57,14 @@ def argument_logic(args, handler: FileHandler) -> None:
     """
     args = argument_handler()
     if args.make is not None:
-        if args.make == 'normal':
+        if args.make == NORMAL_MODE:
             user_actions.make_normal(handler)
-        elif args.make == 'seed':
+        elif args.make == SEED_MODE:
             user_actions.make_seed(handler)
     elif args.run is not None:
-        if args.run == 'normal':
+        if args.run == NORMAL_MODE:
             user_actions.run_normal(handler)
-        elif args.run == 'seed':
+        elif args.run == SEED_MODE:
             user_actions.run_seed(handler)
     elif args.status is not None:
         status = user_actions.get_file_status(handler)
