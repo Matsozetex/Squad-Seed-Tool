@@ -5,10 +5,9 @@ Handles all interaction with Squad ini files.
 import os
 import logging
 import shutil
-import re
 import pathlib
 
-from src.const import (NORMAL_SETTINGS_FILE, SEED_SETTINGS_FILE, 
+from const import (NORMAL_SETTINGS_FILE, SEED_SETTINGS_FILE,
                        GAME_SETTINGS_FILE, SETTINGS_DATA, SEED_MODE, NORMAL_MODE)
 
 SETTING_DIRECTORY = (pathlib.Path(os.getenv('LOCALAPPDATA'))) / 'SquadGame' / \

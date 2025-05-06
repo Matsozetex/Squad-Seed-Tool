@@ -4,7 +4,7 @@ All user actions as an interface for either interface to use.
 from file_handler import FileHandler
 from launch_squad import run_squad
 from patcher import patch_movies
-from src.const import SEED_MODE, NORMAL_MODE
+from const import SEED_MODE, NORMAL_MODE
 
 def get_file_status(handler: FileHandler) -> list:
     """

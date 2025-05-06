@@ -5,7 +5,7 @@ Defines behaviour of argument controls.
 import argparse
 import user_actions
 from file_handler import FileHandler
-from src.const import SEED_MODE, NORMAL_MODE
+from const import SEED_MODE, NORMAL_MODE
 
 def argument_handler()-> None:
     """
