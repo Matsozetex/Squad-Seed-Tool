@@ -24,7 +24,8 @@ def make_normal(handler: FileHandler):
     Make the normal ini.
     """
     print ("Are you sure you want to make/overwrite your current normal file?")
-    if input("Yes or No? ")[0].lower == "y":  
+    choice = input("Yes or No? ")
+    if choice[0].lower() == 'y':
         handler.create_normal_ini()
     else:
         print("Change exited.")
